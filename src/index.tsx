@@ -1,5 +1,12 @@
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { setupWorker } from 'msw';
+import { handlers } from 'mocks/handler';
+import App from 'App';
+
+const work = setupWorker(...handlers);
+if (process.env.NODE_ENV !== 'production') {
+  work.start();
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
