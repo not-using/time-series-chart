@@ -1,8 +1,16 @@
-import { ChartConfiguration, Chart as ChartJS, registerables } from 'chart.js';
+import {
+  ChartConfiguration,
+  ChartConfigurationCustomTypesPerDataset,
+  Chart as ChartJS,
+  registerables,
+} from 'chart.js';
 import { ComponentProps, useEffect, useRef } from 'react';
 
-type Props = ComponentProps<'canvas'> & ChartConfiguration;
-const Chart = ({ type, data, options, plugins, ...rest }: Props) => {
+type Props = ComponentProps<'canvas'> & {
+  config: ChartConfiguration | ChartConfigurationCustomTypesPerDataset;
+};
+
+const Chart = ({ config, ...rest }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chart = useRef<ChartJS | null>(null);
 
@@ -10,7 +18,7 @@ const Chart = ({ type, data, options, plugins, ...rest }: Props) => {
     if (!canvasRef.current) return;
 
     ChartJS.register(...registerables);
-    chart.current = new ChartJS(canvasRef.current, { type, data, options, plugins });
+    chart.current = new ChartJS(canvasRef.current, config);
 
     return () => {
       if (chart.current) {
@@ -18,7 +26,7 @@ const Chart = ({ type, data, options, plugins, ...rest }: Props) => {
         chart.current = null;
       }
     };
-  }, [data, options, plugins, type]);
+  }, [config]);
 
   return <canvas {...rest} ref={canvasRef} />;
 };
