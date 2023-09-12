@@ -18,21 +18,23 @@ const TimeFlowFilterable = ({ timeFlow }: Props) => {
 
   return (
     <>
-      <Location
-        $isSelected={selectedId === unset.id}
-        onClick={() => setSelectedId(unset.id)}
-      >
-        {unset.name}
-      </Location>
-      {uniqueIds.map((id) => (
+      <Locations>
         <Location
-          key={id}
-          $isSelected={id === selectedId}
-          onClick={() => setSelectedId(id)}
+          $isSelected={selectedId === unset.id}
+          onClick={() => setSelectedId(unset.id)}
         >
-          {id}
+          {unset.name}
         </Location>
-      ))}
+        {uniqueIds.map((id) => (
+          <Location
+            key={id}
+            $isSelected={id === selectedId}
+            onClick={() => setSelectedId(id)}
+          >
+            {id}
+          </Location>
+        ))}
+      </Locations>
       <Chart config={chartAdaptor.timeFlowToChart(timeFlow, selectedId, setSelectedId)} />
       <Sub>{`${date} 기준`}</Sub>
     </>
@@ -42,6 +44,14 @@ const TimeFlowFilterable = ({ timeFlow }: Props) => {
 export default TimeFlowFilterable;
 
 const color = colors.filters;
+
+const Locations = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 4px 32px 16px;
+  box-sizing: border-box;
+`;
 
 const Location = styled.button<{ $isSelected?: boolean }>`
   background-color: white;
