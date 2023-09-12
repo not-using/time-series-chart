@@ -1,3 +1,3 @@
-import { axiosInstance } from 'utils/axios';
+import { httpClient } from 'utils/httpClient';
 
-export const getTimeFlow = () => axiosInstance.get('/').then((response) => response.data);
+export const getTimeFlow = () => httpClient.get('/').then((response) => response.data);
