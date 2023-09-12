@@ -4,7 +4,7 @@ import { handlers } from 'mocks/handler';
 import App from 'App';
 
 const work = setupWorker(...handlers);
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.REACT_APP_API_URL === undefined) {
   work.start();
 }
 
