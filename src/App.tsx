@@ -8,7 +8,7 @@ import Layout from 'components/styles/Layout';
 import NotFound from 'components/error/NotFound';
 import TimeFlow from 'components/timeflow/TimeFlow';
 import Error from 'components/error/Error';
-import { getTimeFlow } from 'components/api/getTimeFlow';
+import { getTimeFlow } from 'apis/getTimeFlow';
 
 const App = () => {
   const routeElement = createRoutesFromElements(
