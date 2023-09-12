@@ -1,18 +1,17 @@
 import { useLoaderData } from 'react-router-dom';
-import { TimeFlowDto } from 'types/TimeFlowDto';
-import { chartDataAdaptor } from 'utils/chartDataAdaptor';
-import { timeFlowChartOptions } from 'configs/timeFlowChartOptions';
+import { type TimeFlowType } from 'types/TimeFlowType';
+import { type ApiDto } from 'types/ApiDto';
+import { chartAdaptor } from 'utils/chartAdaptor';
 import Chart from 'components/commons/Chart';
 
 const TimeFlow = () => {
-  const response = useLoaderData() as TimeFlowDto;
-  const data = chartDataAdaptor(response);
-  const options = timeFlowChartOptions;
+  const { response } = useLoaderData() as ApiDto<TimeFlowType>;
+  const config = chartAdaptor.timeFlowToChart(response);
 
   return (
     <main>
       <h2>TimeFlow</h2>
-      <Chart config={{ type: 'line', data, options }} />
+      <Chart config={config} />
     </main>
   );
 };
