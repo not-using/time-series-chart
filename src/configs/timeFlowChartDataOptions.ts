@@ -1,4 +1,8 @@
 import { ChartDatasetCustomTypesPerDataset } from 'chart.js';
+import { colors } from './colors';
+
+export const AREA = 0;
+export const BAR = 1;
 
 export const timeFlowChartDataOptions: {
   area: ChartDatasetCustomTypesPerDataset<'line'>;
@@ -8,7 +12,7 @@ export const timeFlowChartDataOptions: {
     type: 'line',
     data: [],
     label: 'Area',
-    backgroundColor: 'rgba(253, 121, 144, 0.9)',
+    backgroundColor: colors.chart.area,
     yAxisID: 'y1',
     fill: true,
     pointStyle: false,
@@ -19,7 +23,6 @@ export const timeFlowChartDataOptions: {
     type: 'bar',
     data: [],
     label: 'Bar',
-    backgroundColor: 'rgba(157, 161, 255)',
     yAxisID: 'y2',
   },
 };
