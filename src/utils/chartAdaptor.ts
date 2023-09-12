@@ -4,6 +4,7 @@ import {
 } from 'chart.js';
 import { type TimeFlowType } from 'types/TimeFlowType';
 import { timeFlowChartOptions } from 'configs/timeFlowChartOptions';
+import { timeFlowChartDataOptions } from 'configs/timeFlowChartDataOptions';
 
 export const chartAdaptor = {
   timeFlowToChart(timeFlow: TimeFlowType): ChartConfigurationCustomTypesPerDataset {
@@ -13,25 +14,18 @@ export const chartAdaptor = {
   },
 
   timeFlowToChartData(timeFlow: TimeFlowType): ChartDataCustomTypesPerDataset {
-    const options = timeFlowChartOptions;
-    const axises = Object.keys(options.scales || {});
     return {
       labels: Object.entries(timeFlow).map(
         ([key, value]) => `${value.id} ${key.split(' ')[1]}`,
       ),
       datasets: [
         {
-          type: 'line',
-          label: 'Area',
+          ...timeFlowChartDataOptions.area,
           data: Object.values(timeFlow).map(({ value_area }) => value_area),
-          fill: true,
-          yAxisID: axises[0],
         },
         {
-          type: 'bar',
-          label: 'Bar',
+          ...timeFlowChartDataOptions.bar,
           data: Object.values(timeFlow).map(({ value_bar }) => value_bar),
-          yAxisID: axises[1],
         },
       ],
     };
