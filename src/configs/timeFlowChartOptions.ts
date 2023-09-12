@@ -8,6 +8,7 @@ export const timeFlowChartOptions: ChartOptions = {
   scales: {
     y1: {
       type: 'linear',
+      title: { display: true, text: 'Area' },
       position: 'left',
       suggestedMax: 200,
       ticks: {
@@ -16,6 +17,7 @@ export const timeFlowChartOptions: ChartOptions = {
     },
     y2: {
       type: 'linear',
+      title: { display: true, text: 'Bar' },
       position: 'right',
       grid: {
         drawOnChartArea: false,
@@ -24,6 +26,22 @@ export const timeFlowChartOptions: ChartOptions = {
       ticks: {
         stepSize: 5000,
       },
+    },
+    x: {
+      afterUpdate(axis) {
+        axis.ticks.forEach((value) => {
+          value.label =
+            typeof value.label === 'string' ? value.label.split(' ')[1] : value.label;
+        });
+      },
+      ticks: {
+        maxRotation: 0,
+      },
+    },
+  },
+  plugins: {
+    legend: {
+      position: 'bottom',
     },
   },
 };

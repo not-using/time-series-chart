@@ -16,7 +16,9 @@ export const chartAdaptor = {
     const options = timeFlowChartOptions;
     const axises = Object.keys(options.scales || {});
     return {
-      labels: Object.keys(timeFlow),
+      labels: Object.entries(timeFlow).map(
+        ([key, value]) => `${value.id} ${key.split(' ')[1]}`,
+      ),
       datasets: [
         {
           type: 'line',
