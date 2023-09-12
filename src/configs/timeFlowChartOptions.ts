@@ -44,4 +44,5 @@ export const timeFlowChartOptions: ChartOptions = {
       position: 'bottom',
     },
   },
+  animation: false,
 };
